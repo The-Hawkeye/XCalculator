@@ -5,6 +5,8 @@ import {useState, useRef} from 'react';
 
 import Button from './Components/Button';
 
+import {evaluate} from 'mathjs';
+
 function App() {
   const [inputVal, setInputVal] = useState("");
 
@@ -114,7 +116,8 @@ function App() {
     } else if (val === '=') {
       // Evaluate the expression
       try {
-        const result = eval(inputVal);
+        // const result = eval(inputVal);
+        const result = evaluate(inputVal);
         console.log(result);
         setOutput(result);
       } catch (error) {
