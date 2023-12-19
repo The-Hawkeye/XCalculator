@@ -10,7 +10,7 @@ import {evaluate} from 'mathjs';
 function App() {
   const [inputVal, setInputVal] = useState("");
 
-  const [output, setOutput] = useState("");
+  const [output, setOutput] = useState("  ");
 
   const ifocus = useRef();
 
@@ -118,10 +118,14 @@ function App() {
       try {
         // const result = eval(inputVal);
         const result = evaluate(inputVal);
-        console.log(result);
+        console.log(result,"res");
+
+        if(result===undefined)
+        setOutput('Error')
+        else
         setOutput(result);
       } catch (error) {
-        setOutput('Incorrect Input');
+        setOutput('Error');
       }
     } else {
       ifocus.current.focus();
@@ -136,13 +140,13 @@ function App() {
       <input 
       value={inputVal}
       onChange={(e)=>handleChange(e)}
-        ref={ifocus}>
+        ref={ifocus}
+        type={"text"}>
       </input>
-      <h4>{output}</h4>
+      <div>{output}</div>
 
       <div className='btn-div'>
-      <Button children = {"7"} handleClick={()=>handleClick('7')}
-      />
+      <Button children = {"7"} handleClick={()=>handleClick('7')}/>
       <Button children = {"8"} handleClick={()=>handleClick('8')}/>
       <Button children = {"9"} handleClick={()=>handleClick('9')}/>
       <Button children = {"+"} handleClick={()=>handleClick('+')}/>
